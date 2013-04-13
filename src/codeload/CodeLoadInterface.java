@@ -43,6 +43,7 @@ public class CodeLoadInterface extends javax.swing.JFrame {
 
         fileMenuButton.setText("File");
 
+        openMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuButton.setText("Open");
         openMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,10 +52,17 @@ public class CodeLoadInterface extends javax.swing.JFrame {
         });
         fileMenuButton.add(openMenuButton);
 
+        saveMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         saveMenuButton.setText("Save");
         fileMenuButton.add(saveMenuButton);
 
-        quitMenuButton.setText("Quit");
+        quitMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        quitMenuButton.setText("Exit");
+        quitMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitMenuButtonActionPerformed(evt);
+            }
+        });
         fileMenuButton.add(quitMenuButton);
 
         menuBar.add(fileMenuButton);
@@ -93,6 +101,10 @@ public class CodeLoadInterface extends javax.swing.JFrame {
     private void openMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_openMenuButtonActionPerformed
+
+    private void quitMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitMenuButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quitMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
