@@ -27,50 +27,52 @@ public class CodeLoadInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        textArea1 = new java.awt.TextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        textEditor = new java.awt.TextArea();
+        menuBar = new javax.swing.JMenuBar();
+        fileMenuButton = new javax.swing.JMenu();
+        openMenuButton = new javax.swing.JMenuItem();
+        saveMenuButton = new javax.swing.JMenuItem();
+        quitMenuButton = new javax.swing.JMenuItem();
+        editMenuButton = new javax.swing.JMenu();
+        copyMenuButton = new javax.swing.JMenuItem();
+        pasteMenuButton = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(textArea1);
+        jScrollPane1.setViewportView(textEditor);
 
-        jMenu1.setText("File");
+        fileMenuButton.setText("File");
 
-        jMenuItem1.setText("Open");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        openMenuButton.setText("Open");
+        openMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                openMenuButtonActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        fileMenuButton.add(openMenuButton);
 
-        jMenuItem2.setText("Save");
-        jMenu1.add(jMenuItem2);
+        saveMenuButton.setText("Save");
+        fileMenuButton.add(saveMenuButton);
 
-        jMenuItem3.setText("Quit");
-        jMenu1.add(jMenuItem3);
+        quitMenuButton.setText("Quit");
+        fileMenuButton.add(quitMenuButton);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(fileMenuButton);
 
-        jMenu2.setText("Edit");
+        editMenuButton.setText("Edit");
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Copy");
-        jMenu2.add(jMenuItem4);
+        copyMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        copyMenuButton.setText("Copy");
+        editMenuButton.add(copyMenuButton);
 
-        jMenuItem5.setText("Paste");
-        jMenu2.add(jMenuItem5);
+        pasteMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        pasteMenuButton.setText("Paste");
+        editMenuButton.add(pasteMenuButton);
 
-        jMenuBar1.add(jMenu2);
+        menuBar.add(editMenuButton);
+        editMenuButton.getAccessibleContext().setAccessibleDescription("");
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,9 +90,9 @@ public class CodeLoadInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void openMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_openMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,15 +129,15 @@ public class CodeLoadInterface extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem copyMenuButton;
+    private javax.swing.JMenu editMenuButton;
+    private javax.swing.JMenu fileMenuButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.TextArea textArea1;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem openMenuButton;
+    private javax.swing.JMenuItem pasteMenuButton;
+    private javax.swing.JMenuItem quitMenuButton;
+    private javax.swing.JMenuItem saveMenuButton;
+    private java.awt.TextArea textEditor;
     // End of variables declaration//GEN-END:variables
 }
