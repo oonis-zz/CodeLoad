@@ -54,6 +54,11 @@ public class CodeLoad extends javax.swing.JFrame {
 
         saveMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         saveMenuButton.setText("Save");
+        saveMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuButtonActionPerformed(evt);
+            }
+        });
         fileMenuButton.add(saveMenuButton);
 
         quitMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
@@ -107,6 +112,11 @@ public class CodeLoad extends javax.swing.JFrame {
         //TODO: make it so that (if it should) prompt the user to save the current progress
         System.exit(0);
     }//GEN-LAST:event_quitMenuButtonActionPerformed
+
+    /*Save Menu Button*/
+    private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
