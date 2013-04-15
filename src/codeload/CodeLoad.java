@@ -4,8 +4,13 @@
  */
 package codeload;
 import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -152,6 +157,16 @@ public class CodeLoad extends javax.swing.JFrame {
 
     private void pasteMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuButtonActionPerformed
         // TODO add your handling code here:
+        Transferable clipData = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+        String clipboardText="";
+        if(clipData!=null && clipData.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            try {
+                clipboardText = (String) clipData.getTransferData(DataFlavor.stringFlavor);
+            } catch (    UnsupportedFlavorException | IOException ex) {
+                Logger.getLogger(CodeLoad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println(clipboardText);  //to debug. should print whatever is being pasted
         
     }//GEN-LAST:event_pasteMenuButtonActionPerformed
 
