@@ -3,6 +3,9 @@
  * and open the template in the editor.
  */
 package codeload;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 /**
  *
@@ -27,7 +30,7 @@ public class CodeLoad extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        textEditor = new java.awt.TextArea();
+        textArea = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         fileMenuButton = new javax.swing.JMenu();
         openMenuButton = new javax.swing.JMenuItem();
@@ -39,12 +42,9 @@ public class CodeLoad extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        textEditor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textEditorKeyTyped(evt);
-            }
-        });
-        jScrollPane1.setViewportView(textEditor);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
 
         fileMenuButton.setText("File");
 
@@ -81,10 +81,20 @@ public class CodeLoad extends javax.swing.JFrame {
 
         copyMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuButton.setText("Copy");
+        copyMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuButtonActionPerformed(evt);
+            }
+        });
         editMenuButton.add(copyMenuButton);
 
         pasteMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         pasteMenuButton.setText("Paste");
+        pasteMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuButtonActionPerformed(evt);
+            }
+        });
         editMenuButton.add(pasteMenuButton);
 
         menuBar.add(editMenuButton);
@@ -123,10 +133,17 @@ public class CodeLoad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveMenuButtonActionPerformed
 
-    private void textEditorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textEditorKeyTyped
+    private void copyMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuButtonActionPerformed
         // TODO add your handling code here:
-        //This listener will be used for character count and other things probably
-    }//GEN-LAST:event_textEditorKeyTyped
+        String selection = textArea.getSelectedText();
+        StringSelection data = new StringSelection(selection);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(data, null);
+    }//GEN-LAST:event_copyMenuButtonActionPerformed
+
+    private void pasteMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_pasteMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +189,6 @@ public class CodeLoad extends javax.swing.JFrame {
     private javax.swing.JMenuItem pasteMenuButton;
     private javax.swing.JMenuItem quitMenuButton;
     private javax.swing.JMenuItem saveMenuButton;
-    private java.awt.TextArea textEditor;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }
