@@ -37,6 +37,7 @@ public class CodeLoad extends javax.swing.JFrame {
         saveMenuButton = new javax.swing.JMenuItem();
         quitMenuButton = new javax.swing.JMenuItem();
         editMenuButton = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         copyMenuButton = new javax.swing.JMenuItem();
         pasteMenuButton = new javax.swing.JMenuItem();
 
@@ -78,6 +79,15 @@ public class CodeLoad extends javax.swing.JFrame {
         menuBar.add(fileMenuButton);
 
         editMenuButton.setText("Edit");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Cut");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenuButton.add(jMenuItem1);
 
         copyMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuButton.setText("Copy");
@@ -135,15 +145,23 @@ public class CodeLoad extends javax.swing.JFrame {
 
     private void copyMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuButtonActionPerformed
         // TODO add your handling code here:
-        String selection = textArea.getSelectedText();
-        StringSelection data = new StringSelection(selection);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(data, null);
+        String selection = textArea.getSelectedText();  //store selected text as a string
+        StringSelection data = new StringSelection(selection);  //converts the string to StringSelection
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(data, null);   //Transfers that to the clipboard
     }//GEN-LAST:event_copyMenuButtonActionPerformed
 
     private void pasteMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuButtonActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_pasteMenuButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        //1)copy selected text
+        //2)remove selected text from textArea
+        //3)Profit
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +201,7 @@ public class CodeLoad extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyMenuButton;
     private javax.swing.JMenu editMenuButton;
     private javax.swing.JMenu fileMenuButton;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuButton;
