@@ -166,7 +166,8 @@ public class CodeLoad extends javax.swing.JFrame {
                 Logger.getLogger(CodeLoad.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println(clipboardText);  //to debug. should print whatever is being pasted
+        //System.out.println(clipboardText);  //to debug. should print whatever is being pasted
+        textArea.replaceSelection(clipboardText);
         
     }//GEN-LAST:event_pasteMenuButtonActionPerformed
 
