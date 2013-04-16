@@ -42,7 +42,7 @@ public class CodeLoad extends javax.swing.JFrame {
         saveMenuButton = new javax.swing.JMenuItem();
         quitMenuButton = new javax.swing.JMenuItem();
         editMenuButton = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cutMenuButton = new javax.swing.JMenuItem();
         copyMenuButton = new javax.swing.JMenuItem();
         pasteMenuButton = new javax.swing.JMenuItem();
 
@@ -85,14 +85,14 @@ public class CodeLoad extends javax.swing.JFrame {
 
         editMenuButton.setText("Edit");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Cut");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cutMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        cutMenuButton.setText("Cut");
+        cutMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cutMenuButtonActionPerformed(evt);
             }
         });
-        editMenuButton.add(jMenuItem1);
+        editMenuButton.add(cutMenuButton);
 
         copyMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuButton.setText("Copy");
@@ -126,8 +126,8 @@ public class CodeLoad extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 71, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 61, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -171,13 +171,13 @@ public class CodeLoad extends javax.swing.JFrame {
         
     }//GEN-LAST:event_pasteMenuButtonActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cutMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuButtonActionPerformed
         // TODO add your handling code here:
         //1)copy selected text
         //2)remove selected text from textArea
         //3)Profit
         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cutMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,9 +215,9 @@ public class CodeLoad extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem copyMenuButton;
+    private javax.swing.JMenuItem cutMenuButton;
     private javax.swing.JMenu editMenuButton;
     private javax.swing.JMenu fileMenuButton;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuButton;
