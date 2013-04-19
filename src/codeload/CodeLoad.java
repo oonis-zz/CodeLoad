@@ -85,7 +85,6 @@ public class CodeLoad extends javax.swing.JFrame {
 
         editMenuButton.setText("Edit");
 
-        cutMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         cutMenuButton.setText("Cut");
         cutMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +93,6 @@ public class CodeLoad extends javax.swing.JFrame {
         });
         editMenuButton.add(cutMenuButton);
 
-        copyMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuButton.setText("Copy");
         copyMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +101,6 @@ public class CodeLoad extends javax.swing.JFrame {
         });
         editMenuButton.add(copyMenuButton);
 
-        pasteMenuButton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         pasteMenuButton.setText("Paste");
         pasteMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
