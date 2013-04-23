@@ -13,8 +13,8 @@ import javax.swing.*;
 public class JSCHTest {
   public static void main(String[] arg){
       String userName="test";
-      String password="password";
-      String connectionIP = "localhost";
+      String password="pass";
+      String connectionIP = "adriatic.cse.msu.edu";
       SSHManager instance = new SSHManager(userName, password, connectionIP, "");
       String errorMsg = instance.connect();
       if(errorMsg!=null){
@@ -22,5 +22,7 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
+      String lsCommand=instance.getLS();
+      System.out.println(lsCommand);
   }
   }

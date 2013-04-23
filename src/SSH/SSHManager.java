@@ -45,14 +45,6 @@ public class SSHManager{
     public String connect(){
         String errorMessage = null;
 
-        /*try{
-            sesConnection = jschSSHChannel.getSession(strUserName, strConnectionIP, 22);
-            sesConnection.setPassword(strPassword);
-            sesConnection.connect(intTimeOut);
-        }
-        catch(JSchException jschX){
-            errorMessage = jschX.getMessage();
-        }*/
         try{
             sesConnection = jschSSHChannel.getSession(strUserName, strConnectionIP);
             sesConnection.setPassword(strPassword);
@@ -79,10 +71,17 @@ public class SSHManager{
             errorMessage=jschX.getMessage();
         }
 
-        return errorMessage;
+        return errorMessage;    //return a string for debugging
     }
 
-    public String sendCommand(String command){
+    public String getLS(){
+        String lsString = sendCommand("ls -l");
+        
+        //TODO: break the return up and then return possibly a vector
+        
+        return lsString;
+    }
+    private String sendCommand(String command){
         StringBuilder outputBuffer = new StringBuilder();
 
         try{
