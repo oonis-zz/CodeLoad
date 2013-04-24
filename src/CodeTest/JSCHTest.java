@@ -12,8 +12,8 @@ import javax.swing.*;
  */
 public class JSCHTest {
   public static void main(String[] arg){
-      String userName="test";
-      String password="pass";
+      String userName="";
+      String password="";
       String connectionIP = "adriatic.cse.msu.edu";
       SSHManager instance = new SSHManager(userName, password, connectionIP, "");
       String errorMsg = instance.connect();
@@ -23,6 +23,6 @@ public class JSCHTest {
           System.out.println("Connected!");
       }
       String lsCommand=instance.getLS();
-      System.out.println(lsCommand);
+      //System.out.println(lsCommand);
   }
-  }
+}

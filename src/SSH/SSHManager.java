@@ -78,7 +78,11 @@ public class SSHManager{
         String lsString = sendCommand("ls -l");
         
         //TODO: break the return up and then return possibly a vector
-        
+        System.out.println(lsString);
+        String[] arr = lsString.split("\n");
+        for(String s : arr){
+            System.out.println(s);
+        }
         return lsString;
     }
     private String sendCommand(String command){
