@@ -22,7 +22,8 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
-      String lsCommand=instance.getLS();
+      instance.getLS();
+      instance.disconnect();
       //System.out.println(lsCommand);
   }
 }

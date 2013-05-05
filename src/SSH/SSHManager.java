@@ -7,7 +7,11 @@ package SSH;
 import com.jcraft.jsch.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -74,17 +78,21 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
-    public String getLS(){
+    public void getLS(){
         String lsString = sendCommand("ls -l");
         
         //TODO: break the return up and then return possibly a vector
-        System.out.println(lsString);
+
         String[] arr = lsString.split("\n");
-        for(String s : arr){
-            System.out.println(s);
+        for(int x=1;x<arr.length;x++){
+            //System.out.println(arr[x]);
+            FileInfo test = new FileInfo(arr[x]);
+            break;
         }
-        return lsString;
+        //return arr;
     }
+    
+    
     private String sendCommand(String command){
         StringBuilder outputBuffer = new StringBuilder();
 
@@ -109,6 +117,10 @@ public class SSHManager{
 
      return outputBuffer.toString();
   }
+    
+    public void disconnect(){
+        sesConnection.disconnect();
+    }
 
 public static abstract class MyUserInfo
                           implements UserInfo, UIKeyboardInteractive{
