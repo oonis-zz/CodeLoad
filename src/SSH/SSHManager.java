@@ -7,6 +7,7 @@ package SSH;
 import com.jcraft.jsch.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import java.util.Map;
@@ -78,18 +79,19 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
-    public void getLS(){
+    public ArrayList getLS(){
         String lsString = sendCommand("ls -l");
         
         //TODO: break the return up and then return possibly a vector
-
+        ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
         String[] arr = lsString.split("\n");
+        //FileInfo[] out = new FileInfo[arr.length-1];
         for(int x=1;x<arr.length;x++){
             //System.out.println(arr[x]);
-            FileInfo test = new FileInfo(arr[x]);
-            break;
+            out.add(new FileInfo(arr[x]));
+            //break;
         }
-        //return arr;
+        return out;
     }
     
     

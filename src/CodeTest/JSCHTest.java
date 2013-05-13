@@ -4,6 +4,7 @@
  */
 package CodeTest;
 import SSH.*;
+import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 /**
@@ -22,7 +23,23 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
-      instance.getLS();
+      ArrayList<FileInfo> testArray = instance.getLS();
+      
+      for(FileInfo temp : testArray){
+          System.out.println("Name:: " + temp.getName());
+          System.out.println("MIME type:: " + temp.getType());
+          System.out.println("Size:: " + temp.getSize());
+          if(temp.getRead())
+              System.out.println("Can read");
+          else
+              System.out.println("Can't read");
+          if(temp.getWrite())
+              System.out.println("Can write");
+          else
+              System.out.println("Can't write");
+          System.out.println();
+      }
+      
       instance.disconnect();
       //System.out.println(lsCommand);
   }

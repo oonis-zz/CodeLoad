@@ -16,7 +16,7 @@ public class FileInfo {
     private boolean canWrite;
     private int size;
     private String name;
-    private String type;
+    private String type = "";
     private Map locations;
     
     //need to do constructors and methods
@@ -27,9 +27,19 @@ public class FileInfo {
         //TODO. analyze the string and set all of the private variables
         String[] arr = fileString.split("\\s+");
         //System.out.println(fileString);
-        for(String s : arr){
-            System.out.println(s);
-        }
+        //for(String s : arr){
+        //    System.out.println(s);
+        //}
+        analyzePermissions(arr[0]);
+        size = Integer.parseInt(arr[4]);
+        
+        name = arr[8];  //Question: should this include the MIME type?
+        System.out.println("DEBUG " + arr[8]);
+        String[] splitName=arr[8].split("\\.");
+        //System.out.println("DEBUG"+splitName.length);
+        if(splitName.length > 0 && !(type.equals("dir")))
+            type = splitName[splitName.length-1];
+        
     }
     
     private void analyzePermissions(String arr){
@@ -48,10 +58,27 @@ public class FileInfo {
         else
             canWrite = false;
     }
-    /*public boolean getRead(){
+    
+    //if (FileInfo).getRead()==1, then we can read the file
+    public boolean getRead(){
         return canRead;
     }
+    
+    //if (FileInfo).getWrite()==1, then we can write to the file
     public boolean getWrite(){
         return canWrite;
-    }*/
+    }
+    
+    public int getSize(){
+        return size;
+    }
+    
+    
+    public String getName(){
+        return name;
+    }
+    
+    public String getType(){
+        return type;
+    }
 }
