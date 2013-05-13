@@ -25,6 +25,8 @@ public class SSHManager{
     private String strConnectionIP;
     private String strPassword;
     private Session sesConnection;
+    //private ChannelSftp sftpConnection;
+    private String tempDir = System.getProperty("java.io.tmpdir");
     private int intTimeOut;
 
     private void constructorActions(String userName, String password, String host, String knownHostsFileName){
@@ -71,6 +73,7 @@ public class SSHManager{
             
             sesConnection.setUserInfo(ui);
             sesConnection.connect(intTimeOut);
+            
         }
         catch(JSchException jschX){
             errorMessage=jschX.getMessage();
@@ -81,20 +84,51 @@ public class SSHManager{
 
     public ArrayList getLS(){
         String lsString = sendCommand("ls -l");
+        String pwd = sendCommand("pwd");
         
         //TODO: break the return up and then return possibly a vector
         ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
         String[] arr = lsString.split("\n");
         //FileInfo[] out = new FileInfo[arr.length-1];
         for(int x=1;x<arr.length;x++){
-            //System.out.println(arr[x]);
-            out.add(new FileInfo(arr[x]));
-            //break;
+            out.add(new FileInfo(arr[x],pwd));
         }
         return out;
     }
     
+    // I would put this in FileInfo.java, but it would require a lot of redundancies
+    public void downloadFile(FileInfo input){
+        /*if(input.getType().equals("dir")){
+            System.out.println("Is a directory");
+            //run the cd command
+            sendCommand("cd" + input.getLocation());
+            String junk = sendCommand("pwd");
+            System.out.println(junk);
+            return;
+        }*/
+        
+        String dirTemp = tempDir + "" + input.getName();
+        System.out.println("DEBUG:: " + dirTemp);
+        try{
+        ChannelSftp sftpChannel = (ChannelSftp)sesConnection.openChannel("sftp");
+        sftpChannel.connect();
+        
+        //System.out.println("begin downloading file");
+        if(input.getType().equals("dir")){
+            sftpChannel.cd(input.getName());
+            String junk = sendCommand("pwd");
+            System.out.println(junk);
+        } else{
+            sftpChannel.get(input.getLocation(),dirTemp);
+        }
+        sftpChannel.exit();
+        } catch( JSchException | SftpException ioX){
+            System.out.println(ioX.getMessage());
+        }
+    }
     
+    //using a generic command sending method may make things a hell of a lot
+    //easier in the futre
     private String sendCommand(String command){
         StringBuilder outputBuffer = new StringBuilder();
 

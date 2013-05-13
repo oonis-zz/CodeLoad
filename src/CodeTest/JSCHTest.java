@@ -27,6 +27,7 @@ public class JSCHTest {
       
       for(FileInfo temp : testArray){
           System.out.println("Name:: " + temp.getName());
+          System.out.println("Location:: "+temp.getLocation());
           System.out.println("MIME type:: " + temp.getType());
           System.out.println("Size:: " + temp.getSize());
           if(temp.getRead())
@@ -37,6 +38,9 @@ public class JSCHTest {
               System.out.println("Can write");
           else
               System.out.println("Can't write");
+          
+          if((temp.getType().equals("dir")))
+              instance.downloadFile(temp);
           System.out.println();
       }
       

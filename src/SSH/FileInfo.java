@@ -17,13 +17,14 @@ public class FileInfo {
     private int size;
     private String name;
     private String type = "";
-    private Map locations;
+    private String location;
+    //TODO: Add an image icon maybe? probably not
     
     //need to do constructors and methods
     
     
     
-    public FileInfo(String fileString){
+    public FileInfo(String fileString, String pwd){
         //TODO. analyze the string and set all of the private variables
         String[] arr = fileString.split("\\s+");
         //System.out.println(fileString);
@@ -39,6 +40,8 @@ public class FileInfo {
         //System.out.println("DEBUG"+splitName.length);
         if(splitName.length > 0 && !(type.equals("dir")))
             type = splitName[splitName.length-1];
+        pwd = pwd.replaceAll("(\\r|\\n)", "");
+        location = pwd + "/" +name;
         
     }
     
@@ -80,5 +83,9 @@ public class FileInfo {
     
     public String getType(){
         return type;
+    }
+    
+    public String getLocation(){
+        return location;
     }
 }
