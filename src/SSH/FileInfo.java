@@ -35,7 +35,6 @@ public class FileInfo {
         size = Integer.parseInt(arr[4]);
         
         name = arr[8];  //Question: should this include the MIME type?
-        System.out.println("DEBUG " + arr[8]);
         String[] splitName=arr[8].split("\\.");
         //System.out.println("DEBUG"+splitName.length);
         if(splitName.length > 0 && !(type.equals("dir")))

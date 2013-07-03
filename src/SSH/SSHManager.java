@@ -8,6 +8,7 @@ import com.jcraft.jsch.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Vector;
 //import java.util.Arrays;
 import javax.swing.JOptionPane;
 //import java.util.Map;
@@ -25,7 +26,7 @@ public class SSHManager{
     private String strConnectionIP;
     private String strPassword;
     private Session sesConnection;
-    //private ChannelSftp sftpConnection;
+    private String currDir; // The current remote directory. NOTE: you can only view one directory at a time. 
     private String tempDir = System.getProperty("java.io.tmpdir");
     private int intTimeOut;
 
@@ -53,7 +54,7 @@ public class SSHManager{
         String errorMessage = null;
 
         try{
-            sesConnection = jschSSHChannel.getSession(strUserName, strConnectionIP);
+            sesConnection = jschSSHChannel.getSession(strUserName, strConnectionIP,22);
             sesConnection.setPassword(strPassword);
             UserInfo ui = new MyUserInfo(){
                 public void showMessage(String message){
@@ -74,6 +75,9 @@ public class SSHManager{
             sesConnection.setUserInfo(ui);
             sesConnection.connect(intTimeOut);
             
+            currDir = sendCommand("pwd");
+            currDir = currDir.replace("\n", "").replace("\r", "");
+            
         }
         catch(JSchException jschX){
             errorMessage=jschX.getMessage();
@@ -83,48 +87,64 @@ public class SSHManager{
     }
 
     public ArrayList getLS(){
-        String lsString = sendCommand("ls -l");
-        String pwd = sendCommand("pwd");
+        //String commandString = "ls " + currDir + " -l";
+        //System.out.println(commandString);
+        String lsString = sendCommand("ls " + currDir + " -l");
+        //System.out.println(lsString);
+        //String pwd = sendCommand("pwd");
         
         //TODO: break the return up and then return possibly a vector
         ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
         String[] arr = lsString.split("\n");
         //FileInfo[] out = new FileInfo[arr.length-1];
         for(int x=1;x<arr.length;x++){
-            out.add(new FileInfo(arr[x],pwd));
+            System.out.println(arr[x]);
+            out.add(new FileInfo(arr[x],currDir));
         }
         return out;
     }
     
-    // I would put this in FileInfo.java, but it would require a lot of redundancies
-    public void downloadFile(FileInfo input){
-        /*if(input.getType().equals("dir")){
-            System.out.println("Is a directory");
-            //run the cd command
-            sendCommand("cd" + input.getLocation());
-            String junk = sendCommand("pwd");
-            System.out.println(junk);
-            return;
-        }*/
-        
-        String dirTemp = tempDir + "" + input.getName();
-        System.out.println("DEBUG:: " + dirTemp);
+    // This will be what is called on outside of the class. 
+    // TODO: find a way to associate where on the local machine a file is saved
+    /*public String file_selected(FileInfo selected){
+        String toReturn = "";
+        if(selected.getType().equals("dir")){
+            changeDirectory(selected.getName());
+            toReturn = ""
+ 
+    }*/
+    
+    // returns a list of Files in the subdirectory changed to
+    public ArrayList changeDirectory(FileInfo input){
+        currDir = currDir+"/"+input.getName();
+        System.out.println(currDir);
+        ArrayList<FileInfo> newLS = getLS();
+        return newLS;
+    }
+    
+    // If called on a file, it will download that file to the temp dir, if
+    // it's a directory, it will cd to that command and return the ls -al
+    public String downloadFile(FileInfo input){
+        String dirTemp = tempDir + "" + input.getName(); // will probably save this to input?
+        Channel channel = null;
+        ChannelSftp sftpChannel = null;
         try{
-        ChannelSftp sftpChannel = (ChannelSftp)sesConnection.openChannel("sftp");
-        sftpChannel.connect();
+                channel = sesConnection.openChannel("sftp");
+                channel.connect();
+                sftpChannel = (ChannelSftp)channel;
         
         //System.out.println("begin downloading file");
         if(input.getType().equals("dir")){
-            sftpChannel.cd(input.getName());
-            String junk = sendCommand("pwd");
-            System.out.println(junk);
+            // Do nothing I guess?
         } else{
             sftpChannel.get(input.getLocation(),dirTemp);
         }
-        sftpChannel.exit();
+        sftpChannel.disconnect();
         } catch( JSchException | SftpException ioX){
             System.out.println(ioX.getMessage());
+            return "";
         }
+        return dirTemp;
     }
     
     //using a generic command sending method may make things a hell of a lot
