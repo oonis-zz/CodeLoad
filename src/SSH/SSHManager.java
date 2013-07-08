@@ -8,7 +8,6 @@ import com.jcraft.jsch.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Vector;
 //import java.util.Arrays;
 import javax.swing.JOptionPane;
 //import java.util.Map;
