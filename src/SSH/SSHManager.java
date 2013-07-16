@@ -94,9 +94,12 @@ public class SSHManager{
         ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
         String[] arr = lsString.split("\n");
         //FileInfo[] out = new FileInfo[arr.length-1];
+        
         for(int x=1;x<arr.length;x++){
             System.out.println(arr[x]);
-            out.add(new FileInfo(arr[x],currDir));
+            FileInfo temp = new FileInfo(arr[x]); // This is a bad approach and I'll fix this eventually
+            temp.setPath(currDir);
+            out.add(temp);
         }
         return out;
     }
@@ -146,7 +149,7 @@ public class SSHManager{
     
     //using a generic command sending method may make things a hell of a lot
     //easier in the futre
-    private String sendCommand(String command){
+    public String sendCommand(String command){
         StringBuilder outputBuffer = new StringBuilder();
 
         try{

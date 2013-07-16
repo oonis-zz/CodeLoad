@@ -13,8 +13,8 @@ import javax.swing.*;
  */
 public class JSCHTest {
   public static void main(String[] arg){
-      String userName="";
-      String password="";
+      String userName="macalus6";
+      String password="buquwr67";
       String connectionIP = "adriatic.cse.msu.edu";
       SSHManager instance = new SSHManager(userName, password, connectionIP, "");
       String errorMsg = instance.connect();
@@ -23,6 +23,8 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
+      
+      
       ArrayList<FileInfo> firstLevel = instance.getLS();
       System.out.println("Printing directory:: " + firstLevel.get(3).getName());
       ArrayList<FileInfo> secondLevel = instance.changeDirectory(firstLevel.get(3));
@@ -50,11 +52,11 @@ public class JSCHTest {
           System.out.println("Location:: "+temp.getLocation());
           System.out.println("MIME type:: " + temp.getType());
           System.out.println("Size:: " + temp.getSize());
-          if(temp.getRead())
+          if(temp.canRead())
               System.out.println("Can read");
           else
               System.out.println("Can't read");
-          if(temp.getWrite())
+          if(temp.canWrite())
               System.out.println("Can write");
           else
               System.out.println("Can't write");

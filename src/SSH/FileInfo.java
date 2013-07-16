@@ -4,13 +4,14 @@
  */
 package SSH;
 
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
+import java.io.File;
 /**
  *
  * @author Sam
  */
-public class FileInfo {
+public class FileInfo extends File{
     //maybe these should be public
     private boolean canRead;
     private boolean canWrite;
@@ -24,13 +25,11 @@ public class FileInfo {
     
     
     
-    public FileInfo(String fileString, String pwd){
+    public FileInfo(String fileString){
+        super(fileString);
         //TODO. analyze the string and set all of the private variables
         String[] arr = fileString.split("\\s+");
-        //System.out.println(fileString);
-        //for(String s : arr){
-        //    System.out.println(s);
-        //}
+
         analyzePermissions(arr[0]);
         size = Integer.parseInt(arr[4]);
         
@@ -39,9 +38,13 @@ public class FileInfo {
         //System.out.println("DEBUG"+splitName.length);
         if(splitName.length > 0 && !(type.equals("dir")))
             type = splitName[splitName.length-1];
-        pwd = pwd.replaceAll("(\\r|\\n)", "");
-        location = pwd + "/" +name;
+        //pwd = pwd.replaceAll("(\\r|\\n)", "");
+        //location = pwd + "/" +name;
         
+    }
+    
+    public void setPath(String pwd){
+        location = pwd.replaceAll("(\\r|\\n)", "") + "/" + name;
     }
     
     private void analyzePermissions(String arr){
@@ -62,13 +65,30 @@ public class FileInfo {
     }
     
     //if (FileInfo).getRead()==1, then we can read the file
-    public boolean getRead(){
+    @Override
+    public boolean canRead(){
         return canRead;
     }
     
+    @Override
+    public boolean isDirectory(){
+        return type.equals("dir");
+    }
+    
+    @Override
+    public boolean isFile(){
+        return !(type.equals("dir"));
+    }
+    
     //if (FileInfo).getWrite()==1, then we can write to the file
-    public boolean getWrite(){
+    @Override
+    public boolean canWrite(){
         return canWrite;
+    }
+    
+    @Override
+    public boolean canExecute(){ // For now, just assume you can
+        return true;
     }
     
     public int getSize(){
