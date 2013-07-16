@@ -19,10 +19,6 @@ public class FileInfo extends File{
     private String name;
     private String type = "";
     private String location;
-    //TODO: Add an image icon maybe? probably not
-    
-    //need to do constructors and methods
-    
     
     
     public FileInfo(String fileString){
@@ -38,8 +34,6 @@ public class FileInfo extends File{
         //System.out.println("DEBUG"+splitName.length);
         if(splitName.length > 0 && !(type.equals("dir")))
             type = splitName[splitName.length-1];
-        //pwd = pwd.replaceAll("(\\r|\\n)", "");
-        //location = pwd + "/" +name;
         
     }
     

@@ -84,13 +84,7 @@ public class SSHManager{
     }
 
     public ArrayList getLS(){
-        //String commandString = "ls " + currDir + " -l";
-        //System.out.println(commandString);
         String lsString = sendCommand("ls " + currDir + " -l");
-        //System.out.println(lsString);
-        //String pwd = sendCommand("pwd");
-        
-        //TODO: break the return up and then return possibly a vector
         ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
         String[] arr = lsString.split("\n");
         //FileInfo[] out = new FileInfo[arr.length-1];
@@ -103,16 +97,6 @@ public class SSHManager{
         }
         return out;
     }
-    
-    // This will be what is called on outside of the class. 
-    // TODO: find a way to associate where on the local machine a file is saved
-    /*public String file_selected(FileInfo selected){
-        String toReturn = "";
-        if(selected.getType().equals("dir")){
-            changeDirectory(selected.getName());
-            toReturn = ""
- 
-    }*/
     
     // returns a list of Files in the subdirectory changed to
     public ArrayList changeDirectory(FileInfo input){

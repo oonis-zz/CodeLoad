@@ -5,8 +5,8 @@
 package CodeTest;
 import SSH.*;
 import java.util.ArrayList;
-import java.awt.*;
-import javax.swing.*;
+//import java.awt.*;
+//import javax.swing.*;
 /**
  *
  * @author Sam
@@ -28,20 +28,7 @@ public class JSCHTest {
       ArrayList<FileInfo> firstLevel = instance.getLS();
       System.out.println("Printing directory:: " + firstLevel.get(3).getName());
       ArrayList<FileInfo> secondLevel = instance.changeDirectory(firstLevel.get(3));
-      //System.out.println(instance.sendCommand("pwd"));
-      //instance.downloadFile(null);
-      //System.out.println(instance.sendCommand("pwd"));
-      
-      
-      /*for(FileInfo temp : firstLevel){
-          if((temp.getType().equals("dir"))){
-              secondLevel = instance.changeDirectory(temp);
-              System.out.println("Printing directory:: " + temp.getName());
-              System.out.println("---------------------------------");
-              printDirectory(secondLevel);
-          }
-      }*/
-      //printDirectory(secondLevel);
+
       instance.disconnect();
   }
   
