@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 //import java.util.Arrays;
 import javax.swing.JOptionPane;
-import java.util.List;
 
 
 /**
@@ -23,7 +22,7 @@ public class SSHManager{
     private String strConnectionIP;
     private String strPassword;
     private Session sesConnection;
-    private String currDir; // The current remote directory. NOTE: you can only view one directory at a time. 
+    private String currDir; // TODO: make this a FileInfo
     private String tempDir = System.getProperty("java.io.tmpdir");
     private int intTimeOut;
 
@@ -83,11 +82,10 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
-    public ArrayList getLS(){
-        String lsString = sendCommand("ls " + currDir + " -l");
-        ArrayList<FileInfo> out = new ArrayList<FileInfo>(); 
+    public ArrayList getLS(String dirName){
+        String lsString = sendCommand("ls " + dirName + " -l");
+        ArrayList<FileInfo> out = new ArrayList<>(); 
         String[] arr = lsString.split("\n");
-        //FileInfo[] out = new FileInfo[arr.length-1];
         
         for(int x=1;x<arr.length;x++){
             System.out.println(arr[x]);
@@ -98,26 +96,34 @@ public class SSHManager{
         return out;
     }
     
+    /*public Fileinfo getLS(){
+        String lsString = sendCommand("ls " + currDir + " -l");
+        String[] arr = lsString.split("\n");
+        
+        for(int x=1;x<arr.length;x++){
+            
+        }
+    }*/
+    
     // returns a list of Files in the subdirectory changed to
-    public ArrayList changeDirectory(FileInfo input){
+    /*public ArrayList changeDirectory(FileInfo input){
         currDir = currDir+"/"+input.getName();
         System.out.println(currDir);
         ArrayList<FileInfo> newLS = getLS();
         return newLS;
-    }
+    }*/
     
     // If called on a file, it will download that file to the temp dir, if
     // it's a directory, it will cd to that command and return the ls -al
     public String downloadFile(FileInfo input){
         String dirTemp = tempDir + "" + input.getName(); // will probably save this to input?
-        Channel channel = null;
-        ChannelSftp sftpChannel = null;
+        Channel channel;
+        ChannelSftp sftpChannel;
         try{
                 channel = sesConnection.openChannel("sftp");
                 channel.connect();
                 sftpChannel = (ChannelSftp)channel;
         
-        //System.out.println("begin downloading file");
         if(input.getType().equals("dir")){
             // Do nothing I guess?
         } else{
@@ -164,12 +170,19 @@ public class SSHManager{
 
 public static abstract class MyUserInfo
                           implements UserInfo, UIKeyboardInteractive{
+    @Override
     public String getPassword(){ return null; }
+    @Override
     public boolean promptYesNo(String str){ return false; }
+    @Override
     public String getPassphrase(){ return null; }
+    @Override
     public boolean promptPassphrase(String message){ return false; }
+    @Override
     public boolean promptPassword(String message){ return false; }
+    @Override
     public void showMessage(String message){ }
+    @Override
     public String[] promptKeyboardInteractive(String destination,
                                               String name,
                                               String instruction,

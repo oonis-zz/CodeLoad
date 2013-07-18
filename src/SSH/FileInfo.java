@@ -7,6 +7,7 @@ package SSH;
 //import java.util.HashMap;
 //import java.util.Map;
 import java.io.File;
+import java.util.ArrayList;
 /**
  *
  * @author Sam
@@ -23,7 +24,7 @@ public class FileInfo extends File{
     
     public FileInfo(String fileString){
         super(fileString);
-        //TODO. analyze the string and set all of the private variables
+
         String[] arr = fileString.split("\\s+");
 
         analyzePermissions(arr[0]);
@@ -31,7 +32,7 @@ public class FileInfo extends File{
         
         name = arr[8];  //Question: should this include the MIME type?
         String[] splitName=arr[8].split("\\.");
-        //System.out.println("DEBUG"+splitName.length);
+
         if(splitName.length > 0 && !(type.equals("dir")))
             type = splitName[splitName.length-1];
         
@@ -58,7 +59,17 @@ public class FileInfo extends File{
             canWrite = false;
     }
     
-    //if (FileInfo).getRead()==1, then we can read the file
+    @Override
+    public FileInfo[] listFiles(){
+        // TODO
+        if(!type.equals("dir"))
+            return null;
+        
+        //ArrayList<FileInfo> temp = SSHManager.getLS(name);
+        
+        return null;
+    }
+    
     @Override
     public boolean canRead(){
         return canRead;
@@ -90,6 +101,7 @@ public class FileInfo extends File{
     }
     
     
+    @Override
     public String getName(){
         return name;
     }

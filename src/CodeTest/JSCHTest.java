@@ -25,9 +25,10 @@ public class JSCHTest {
       }
       
       
-      ArrayList<FileInfo> firstLevel = instance.getLS();
-      System.out.println("Printing directory:: " + firstLevel.get(3).getName());
-      ArrayList<FileInfo> secondLevel = instance.changeDirectory(firstLevel.get(3));
+      //ArrayList<FileInfo> firstLevel = instance.getLS();
+      //System.out.println("Printing directory:: " + firstLevel.get(3).getName());
+      //System.out.println("Directory Location:: " + firstLevel.get(3).getLocation()); 
+      //ArrayList<FileInfo> secondLevel = instance.changeDirectory(firstLevel.get(3));
 
       instance.disconnect();
   }
