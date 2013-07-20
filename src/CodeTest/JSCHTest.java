@@ -3,7 +3,8 @@
  * and open the template in the editor.
  */
 package CodeTest;
-import SSH.*;
+import connection.FileInfo;
+import connection.SSHManager;
 import java.util.ArrayList;
 //import java.awt.*;
 //import javax.swing.*;

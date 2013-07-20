@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package SSH;
+package connection;
 
 import com.jcraft.jsch.*;
 import java.io.IOException;
