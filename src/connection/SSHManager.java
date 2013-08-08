@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Sam
  */
-public class SSHManager{
+public class SSHManager{    
     private JSch jschSSHChannel;
     private String strUserName;
     private String strConnectionIP;
@@ -78,6 +78,7 @@ public class SSHManager{
             currDir = sendCommand("pwd");
             currDir = currDir.replace("\n", "").replace("\r", "");
             
+            
         }
         catch(JSchException jschX){
             errorMessage=jschX.getMessage();
@@ -86,6 +87,9 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
+    public FileInfo getRoot(){
+        return new FileInfo(currDir,getLS(currDir));
+    }
     public ArrayList< FileInfo > getLS(String dirName){
         String lsString = sendCommand("ls " + dirName + " -l");
         ArrayList<FileInfo> out = new ArrayList<>(); 

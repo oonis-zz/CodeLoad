@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class JSCHTest {
   public static void main(String[] arg){
-      String userName="";
+      String userName="macalus6";
       String password="";
       String connectionIP = "adriatic.cse.msu.edu";
       SSHManager instance = new SSHManager(userName, password, connectionIP, "");
@@ -41,6 +41,7 @@ public class JSCHTest {
           System.out.println("Location:: "+temp.getLocation());
           System.out.println("MIME type:: " + temp.getType());
           System.out.println("Size:: " + temp.getSize());
+          
           if(temp.canRead())
               System.out.println("Can read");
           else

@@ -13,11 +13,12 @@ import java.util.ArrayList;
  * @author Sam
  */
 public class FileInfo extends File{
-    //maybe these should be public
+
     private boolean canRead;
     private boolean canWrite;
     private int size;
     private String name;
+    private ArrayList<FileInfo> elements;
     private String type = "";
     private String location;
     
@@ -37,7 +38,11 @@ public class FileInfo extends File{
             type = splitName[splitName.length-1];
         
     }
-    
+    public FileInfo( String dirName,ArrayList<FileInfo> files ){
+        super(dirName);
+        name = dirName;
+        elements = files;
+    }
     public void setPath(String pwd){
         location = pwd.replaceAll("(\\r|\\n)", "") + "/" + name;
     }
@@ -59,15 +64,20 @@ public class FileInfo extends File{
             canWrite = false;
     }
     
+    public boolean addElements(ArrayList<FileInfo> toAdd){
+        if(!type.equals("dir"))
+            return false;
+        
+        
+        return true;
+    }
+    
     @Override
     public FileInfo[] listFiles(){
-        // TODO
         if(!type.equals("dir"))
             return null;
-        
-        //ArrayList<FileInfo> temp = SSHManager.getLS(name);
-        
-        return null;
+
+        return elements.toArray(new FileInfo[elements.size()]);
     }
     
     @Override
