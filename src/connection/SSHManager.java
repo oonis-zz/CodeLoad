@@ -40,6 +40,10 @@ public class SSHManager{
         strPassword = password;
         strConnectionIP = host;
   }
+    
+    public SSHManager( ConnectionInfo info ){
+        this( info.userName, info.password, info.connectionIP, info.knownHostsFileName );
+    }
 
     public SSHManager(String userName, String password, String host, String knownHostsFileName){
         constructorActions(userName, password, host, knownHostsFileName);
@@ -82,7 +86,7 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
-    public ArrayList getLS(String dirName){
+    public ArrayList< FileInfo > getLS(String dirName){
         String lsString = sendCommand("ls " + dirName + " -l");
         ArrayList<FileInfo> out = new ArrayList<>(); 
         String[] arr = lsString.split("\n");
