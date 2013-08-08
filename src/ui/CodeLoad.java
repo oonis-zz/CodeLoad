@@ -20,6 +20,7 @@ public class CodeLoad extends JFrame{
     public CodeLoad(){
         SSHManager sshm = new SSHManager( LoginDialog.promptForLogin() );
         System.err.println( sshm.connect() );
+        this.add( new DirTreePane( sshm.getRoot(), true ) );
         setSize( 600, 600 );
         setLocationRelativeTo( null );
     }

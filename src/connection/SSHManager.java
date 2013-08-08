@@ -98,6 +98,8 @@ public class SSHManager{
         for(int x=1;x<arr.length;x++){
             System.out.println(arr[x]);
             FileInfo temp = new FileInfo(arr[x]); // This is a bad approach and I'll fix this eventually
+            if( temp.isDirectory() )
+                temp.addElements( getLS(temp.getLocation()) );
             temp.setPath(currDir);
             out.add(temp);
         }
