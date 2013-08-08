@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package codeload;
+package ui;
+import connection.ConnectionInfo;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.StringSelection;
@@ -23,8 +24,12 @@ public class CodeLoad extends javax.swing.JFrame {
      */
     public CodeLoad() {
         initComponents();
+        ConnectionInfo login = LoginDialog.promptForLogin();
+        
+        //debug
+        System.out.println( "username:" + login.userName );
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
