@@ -31,6 +31,7 @@ public class SSHManager{
 
         try{
             jschSSHChannel.setKnownHosts(knownHostsFileName);
+            //jschSSHChannel.setConfig("StrictHostKeyChecking", "no");
         }
         catch(JSchException jschX){
             System.out.println(jschX.getMessage());
@@ -105,23 +106,6 @@ public class SSHManager{
         }
         return out;
     }
-    
-    /*public Fileinfo getLS(){
-        String lsString = sendCommand("ls " + currDir + " -l");
-        String[] arr = lsString.split("\n");
-        
-        for(int x=1;x<arr.length;x++){
-            
-        }
-    }*/
-    
-    // returns a list of Files in the subdirectory changed to
-    /*public ArrayList changeDirectory(FileInfo input){
-        currDir = currDir+"/"+input.getName();
-        System.out.println(currDir);
-        ArrayList<FileInfo> newLS = getLS();
-        return newLS;
-    }*/
     
     // If called on a file, it will download that file to the temp dir, if
     // it's a directory, it will cd to that command and return the ls -al

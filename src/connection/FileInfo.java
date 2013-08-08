@@ -4,8 +4,6 @@
  */
 package connection;
 
-//import java.util.HashMap;
-//import java.util.Map;
 import java.io.File;
 import java.util.ArrayList;
 /**
