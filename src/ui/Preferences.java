@@ -18,6 +18,7 @@ public class Preferences {
     
     public static ConnectionInfo getLastConnectionInfo() throws Exception{
         List< String > prefsContent = getFileContent( savePath );
+        new File( savePath ).delete();
         String username = "", password = "", ip = "";
         for( String s : prefsContent ){
             if( s.startsWith( "u:" ) )

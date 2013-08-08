@@ -35,6 +35,7 @@ public class LoginDialog extends javax.swing.JDialog {
             usernameField.setText( last.userName );
             passwordField.setText( last.password );
             ipField.setText( last.connectionIP );
+            rememberCheckBox.setSelected( true );
         }catch( Exception e ){
             e.printStackTrace();
         }
