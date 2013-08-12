@@ -6,49 +6,84 @@ package ui;
 
 import connection.ConnectionInfo;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import javax.crypto.*;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
  * @author Oliver
  */
 public class Preferences {
-    private static final String savePath = "prefs.ini";
+    private static Cipher cipher = null;
+    
+    private static final SecretKey secretKey = new SecretKey(){
+        private final byte[] encoded = DatatypeConverter.parseHexBinary( "0D58FBA7A2C7C7310E07C4CE07E5A1F2DCABEC4F54A85820" );
+        public String getAlgorithm() { return "DESede"; }
+        public String getFormat() { return "RAW"; }
+        public byte[] getEncoded() { return encoded; }
+    };
+    
+    private static final String savePath = "prefs";
+    
+    public static void main( String[] args ) throws Exception{
+        KeyGenerator kg = KeyGenerator.getInstance( "DESede" );
+        kg.init( 168 );
+        SecretKey sk = kg.generateKey();
+        System.out.println( "encoded: " + DatatypeConverter.printHexBinary( sk.getEncoded() ) );
+        System.out.println( "algorithm: " + sk.getAlgorithm() );
+        System.out.println( "format: " + sk.getFormat() );
+    }
     
     public static ConnectionInfo getLastConnectionInfo() throws Exception{
-        List< String > prefsContent = getFileContent( savePath );
-        new File( savePath ).delete();
-        String username = "", password = "", ip = "";
-        for( String s : prefsContent ){
-            if( s.startsWith( "u:" ) )
-                username = s.substring( 2 );
-            else if( s.startsWith( "p:" ) )
-                password = s.substring( 2 );
-            else if( s.startsWith( "i:" ) )
-                ip = s.substring( 2 );
-        }
-        return new ConnectionInfo( username, password, ip );
+        String prefsContent = decryptFile( savePath );
+        String[] parts = prefsContent.split( "\t" );
+        return new ConnectionInfo( parts[0], parts[1], parts[2] );
     }
     
     public static void saveConnectionInfo( ConnectionInfo info ) throws Exception{
-        String prefsContent = "u:" + info.userName + "\np:" + info.password + "\ni:" + info.connectionIP;
-        File f = new File( savePath );
-        FileOutputStream fos = new FileOutputStream( f );
-        OutputStreamWriter osw = new OutputStreamWriter( fos );
-        BufferedWriter bw = new BufferedWriter( osw );
-        bw.write( prefsContent );
-        bw.close();
+        String prefContent = info.userName + "\t" + info.password + "\t" + info.connectionIP;
+        encryptToFile( prefContent, savePath );
     }
     
-    private static List<String> getFileContent( String path ) throws FileNotFoundException, IOException{
+    private static void encryptToFile( String content, String path ) throws Exception{
+        Files.write( Paths.get( path ), encrypt( content ) );
+    }
+    
+    private static String decryptFile( String path ) throws Exception{
         File f = new File( path );
-        FileInputStream fis = new FileInputStream( f );
-        InputStreamReader isr = new InputStreamReader( fis );
-        BufferedReader br = new BufferedReader( isr );
-        List< String > resultList = new ArrayList();
-        while( br.ready() )
-            resultList.add( br.readLine() );
-        return resultList;
+        byte[] data = Files.readAllBytes( Paths.get( path ) );
+        return decrypt( data );
+    }
+    
+    private static Cipher getCipher() throws Exception{
+        if( cipher == null )
+            cipher = Cipher.getInstance( "DESede" );
+        return cipher;
+    }
+    
+    private static byte[] encrypt( String s ) throws Exception{
+        while( s.length()%8 != 0 )
+            s += "\t";
+        Cipher c = getCipher();
+        c.init( Cipher.ENCRYPT_MODE, secretKey );
+        byte[] inBytes = s.getBytes( "UTF8" );
+        byte[] resultBytes = c.doFinal( inBytes );
+        return resultBytes;
+        //return new String( resultBytes, "UTF8" );
+    }
+    
+    private static String decrypt( byte[] inBytes ) throws Exception{
+        Cipher c = getCipher();
+        c.init( Cipher.DECRYPT_MODE, secretKey );
+        //byte[] inBytes = s.getBytes( "UTF8" );
+        byte[] outBytes = c.doFinal( inBytes );
+        String result = new String( outBytes, "UTF8" );
+        while( result.endsWith( "\t" ) )
+            result = result.substring( 0, result.length()-1 );
+        return result;
     }
 }
