@@ -7,6 +7,7 @@ package ui;
 import connection.ConnectionInfo;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,8 @@ public class Preferences {
     }
     
     private static void encryptToFile( String content, String path ) throws Exception{
-        Files.write( Paths.get( path ), encrypt( content ) );
+        Path p = Files.write( Paths.get( path ), encrypt( content ) );
+        Files.setAttribute( p, "dos:hidden", true );
     }
     
     private static String decryptFile( String path ) throws Exception{
