@@ -31,7 +31,6 @@ public class SSHManager{
 
         try{
             jschSSHChannel.setKnownHosts(knownHostsFileName);
-            //jschSSHChannel.setConfig("StrictHostKeyChecking", "no");
         }
         catch(JSchException jschX){
             System.out.println(jschX.getMessage());
@@ -97,7 +96,7 @@ public class SSHManager{
         String[] arr = lsString.split("\n");
         
         for(int x=1;x<arr.length;x++){
-            System.out.println(arr[x]);
+            //System.out.println(arr[x]);
             FileInfo temp = new FileInfo(arr[x]); // This is a bad approach and I'll fix this eventually
             if( temp.isDirectory() )
                 temp.addElements( getLS(temp.getLocation()) );

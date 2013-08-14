@@ -56,7 +56,7 @@ public class Preferences {
     }
     
     private static String decryptFile( String path ) throws Exception{
-        File f = new File( path );
+        File f = new File( path ); // Why is this here?
         byte[] data = Files.readAllBytes( Paths.get( path ) );
         return decrypt( data );
     }
