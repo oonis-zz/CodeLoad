@@ -127,11 +127,19 @@ public class SSHManager{
             System.out.println(ioX.getMessage());
             return "";
         }
+
         return dirTemp;
     }
     
     //using a generic command sending method may make things a hell of a lot
     //easier in the futre
+    /**
+     * This is used to send any command (excluding those involving sftp)
+     * to the remote server. 
+     * @param command The command to be sent to the remote server
+     * @return String which is the exact return from the remote server in
+     * response to the sent command.
+     */
     public String sendCommand(String command){
         StringBuilder outputBuffer = new StringBuilder();
 

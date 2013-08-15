@@ -25,7 +25,6 @@ public class JSCHTest {
           System.out.println("Connected!");
       }
 
-
       instance.disconnect();
   }
   

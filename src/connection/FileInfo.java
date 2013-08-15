@@ -45,6 +45,10 @@ public class FileInfo extends File{
         location = pwd.replaceAll("(\\r|\\n)", "") + "/" + name;
     }
     
+    /**
+     * Interpretes the permissions section of the ls return statement
+     * @param arr The linux permissions string to be interpreted
+     */
     private void analyzePermissions(String arr){
         
         if(arr.charAt(0)=='d')
@@ -62,6 +66,7 @@ public class FileInfo extends File{
             canWrite = false;
     }
     
+    // TODO
     public boolean addElements(ArrayList<FileInfo> toAdd){
         if(!type.equals("dir"))
             return false;
@@ -93,7 +98,7 @@ public class FileInfo extends File{
         return !(type.equals("dir"));
     }
     
-    //if (FileInfo).getWrite()==1, then we can write to the file
+    // If (FileInfo).getWrite()==1, then we can write to the file
     @Override
     public boolean canWrite(){
         return canWrite;
@@ -107,7 +112,6 @@ public class FileInfo extends File{
     public int getSize(){
         return size;
     }
-    
     
     @Override
     public String getName(){
