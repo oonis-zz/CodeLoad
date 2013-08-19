@@ -8,6 +8,7 @@ import com.jcraft.jsch.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.io.File;
 //import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,7 @@ public class SSHManager{
     private String strPassword;
     private Session sesConnection;
     private String currDir; // TODO: make this a FileInfo
+    private File currFile;
     private String tempDir = System.getProperty("java.io.tmpdir");
     private int intTimeOut;
 
@@ -77,6 +79,7 @@ public class SSHManager{
             
             currDir = sendCommand("pwd");
             currDir = currDir.replace("\n", "").replace("\r", "");
+            //currFile = FileInfo(currDir);
             
             
         }
@@ -87,7 +90,7 @@ public class SSHManager{
         return errorMessage;    //return a string for debugging
     }
 
-    public FileInfo getRoot(){
+    public File getRoot(){
         return new FileInfo(currDir,getLS(currDir));
     }
     public ArrayList< FileInfo > getLS(String dirName){

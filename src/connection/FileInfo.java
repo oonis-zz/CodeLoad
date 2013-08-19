@@ -17,6 +17,7 @@ public class FileInfo extends File{
     private int size;
     private String name;
     private ArrayList<FileInfo> elements;
+    private ArrayList<FileInfo> rootElements; // For now do this. fix it later
     private String type = "";
     private String location;
     
@@ -39,7 +40,8 @@ public class FileInfo extends File{
     public FileInfo( String dirName,ArrayList<FileInfo> files ){
         super(dirName);
         name = dirName;
-        elements = files;
+        if(!addElements(files))
+            System.out.println("Why are you calling on me!");
     }
     public void setPath(String pwd){
         location = pwd.replaceAll("(\\r|\\n)", "") + "/" + name;
@@ -71,16 +73,27 @@ public class FileInfo extends File{
         if(!type.equals("dir"))
             return false;
         
-        
+        elements = toAdd;
         return true;
     }
     
     @Override
-    public FileInfo[] listFiles(){
+    public File[] listFiles(){
         if(!type.equals("dir"))
             return null;
 
         return elements.toArray(new FileInfo[elements.size()]);
+    }
+    
+    /*@Override
+    public static FileInfo[] listRoots(){
+        
+    }*/
+    
+    // TODO. Just return false for now
+    @Override
+    public boolean isHidden(){
+        return false;
     }
     
     @Override

@@ -6,6 +6,7 @@ package CodeTest;
 import connection.FileInfo;
 import connection.SSHManager;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 //import java.awt.*;
 //import javax.swing.*;
 /**
@@ -24,6 +25,8 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
+      final JFileChooser fc = new JFileChooser(instance.getRoot());
+      fc.showOpenDialog(null);
 
       instance.disconnect();
   }
