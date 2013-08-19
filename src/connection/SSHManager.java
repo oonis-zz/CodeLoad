@@ -79,7 +79,7 @@ public class SSHManager{
             
             currDir = sendCommand("pwd");
             currDir = currDir.replace("\n", "").replace("\r", "");
-            //currFile = FileInfo(currDir);
+            //FileInfo test = FileInfo(currDir);
             
             
         }
@@ -101,9 +101,12 @@ public class SSHManager{
         for(int x=1;x<arr.length;x++){
             //System.out.println(arr[x]);
             FileInfo temp = new FileInfo(arr[x]); // This is a bad approach and I'll fix this eventually
-            if( temp.isDirectory() )
+            if( temp.isDirectory() ){
+                System.out.println(temp.getLocation());
+                
                 temp.addElements( getLS(temp.getLocation()) );
-            temp.setPath(currDir);
+            }
+            //temp.setPath(currDir);
             out.add(temp);
         }
         return out;

@@ -21,7 +21,7 @@ public class FileInfo extends File{
     private String type = "";
     private String location;
     
-    
+    // TODO: make it so this is the only thing needed maybe?
     public FileInfo(String fileString){
         super(fileString);
 
@@ -35,6 +35,8 @@ public class FileInfo extends File{
 
         if(splitName.length > 0 && !(type.equals("dir")))
             type = splitName[splitName.length-1];
+        
+        //setPath(name);
         
     }
     public FileInfo( String dirName,ArrayList<FileInfo> files ){

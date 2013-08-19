@@ -7,6 +7,7 @@ import connection.FileInfo;
 import connection.SSHManager;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import java.io.File;
 //import java.awt.*;
 //import javax.swing.*;
 /**
@@ -25,8 +26,10 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
-      final JFileChooser fc = new JFileChooser(instance.getRoot());
-      fc.showOpenDialog(null);
+      File currentDirectory = instance.getRoot();
+      File test = new File("C:\\Users\\Sam\\Desktop\\Phi2.txt");
+      //final JFileChooser fc = new JFileChooser(currentDirectory);
+      //fc.showOpenDialog(null);
 
       instance.disconnect();
   }
