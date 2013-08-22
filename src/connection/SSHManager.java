@@ -22,7 +22,7 @@ public class SSHManager{
     private String strUserName;
     private String strConnectionIP;
     private String strPassword;
-    private Session sesConnection;
+    private static Session sesConnection;
     private String currDir; // TODO: make this a FileInfo
     private File currFile;
     private String tempDir = System.getProperty("java.io.tmpdir");
@@ -93,6 +93,11 @@ public class SSHManager{
     public File getRoot(){
         return new FileInfo(currDir,getLS(currDir));
     }
+    
+    public static Session getSession(){
+        return sesConnection;
+    }
+    
     public ArrayList< FileInfo > getLS(String dirName){
         String lsString = sendCommand("ls " + dirName + " -l");
         ArrayList<FileInfo> out = new ArrayList<>(); 
