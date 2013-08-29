@@ -16,7 +16,7 @@ import java.io.File;
  */
 public class JSCHTest {
   public static void main(String[] arg){
-      String userName="macalus6";
+      /*String userName="macalus6";
       String password="";
       String connectionIP = "adriatic.cse.msu.edu";
       SSHManager instance = new SSHManager(userName, password, connectionIP, "");
@@ -31,7 +31,10 @@ public class JSCHTest {
       //final JFileChooser fc = new JFileChooser(currentDirectory);
       //fc.showOpenDialog(null);
 
-      instance.disconnect();
+      instance.disconnect();*/
+      String tempDir = System.getProperty("java.io.tmpdir")+"herro";
+      File f = new File(tempDir);
+      boolean mkdir = f.mkdir();
   }
   
   public static void printDirectory(ArrayList<FileInfo> input){
