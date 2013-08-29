@@ -16,16 +16,14 @@ import java.io.IOException;
 public class RemoteFileSystemView extends FileSystemView{
     
     // NOTE: I still need to figure out what variables i need/don't need
-    private static final char[] symbols = new char[36];
-    private char[] buff;
-    private Random random = new Random();
-    
-    static { // We want symbols to have every alphanumeric value 0-9:a-z
+    private static final char[] symbols = new char[36];{ // We want symbols to have every alphanumeric value 0-9:a-z
         for (int idx = 0; idx < 10; ++idx)
             symbols[idx] = (char) ('0' + idx);
         for (int idx = 10; idx < 36; ++idx)
             symbols[idx] = (char) ('a' + idx - 10);
   }
+    private char[] buff;
+    private Random random = new Random();
     
     public static final String FILE_SEPERATOR = "/";
     private final Session sesConnection;
