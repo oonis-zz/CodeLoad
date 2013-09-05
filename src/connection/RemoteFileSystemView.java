@@ -67,4 +67,12 @@ public class RemoteFileSystemView extends FileSystemView{
     public File createNewFolder ( File containingDir ) throws IOException{
         throw new IOException( "Method not completed" );
     }
+    
+    
+    
+    
+    
+    
+    
+    
 }

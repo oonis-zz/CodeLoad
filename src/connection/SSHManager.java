@@ -80,6 +80,7 @@ public class SSHManager{
             currDir = sendCommand("pwd");
             currDir = currDir.replace("\n", "").replace("\r", "");
             //FileInfo test = FileInfo(currDir);
+            System.out.println();
             
             
         }
@@ -133,12 +134,14 @@ public class SSHManager{
         } else{
             sftpChannel.get(input.getLocation(),dirTemp);
         }
+            System.out.println("hi");
+        System.out.println(sftpChannel.lpwd());
         sftpChannel.disconnect();
         } catch( JSchException | SftpException ioX){
             System.out.println(ioX.getMessage());
             return "";
         }
-
+        
         return dirTemp;
     }
     
