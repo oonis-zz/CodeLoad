@@ -28,6 +28,17 @@ public class SSHManager{
     private String tempDir = System.getProperty("java.io.tmpdir");
     private int intTimeOut;
 
+    
+ 
+ /**
+   * Construct SSh Channel using given parameters
+   * @param  String userName for username
+   * @param  String password for password
+   * @param  String host for connection IP
+   * @param  String knownHostsFileName for filename to set up SSH Channel
+   * @exception Throw error if anything wrong with SSH protocol
+   * @return No return value.
+   */ 
     private void constructorActions(String userName, String password, String host, String knownHostsFileName){
         jschSSHChannel = new JSch();
 
@@ -42,16 +53,33 @@ public class SSHManager{
         strPassword = password;
         strConnectionIP = host;
   }
-    
+ 
+    /**
+   * Set up username, password, connectionIP, Host's FileName
+   * @param  ConnectionInfo class connection info with username, password, etc.
+   */ 
     public SSHManager( ConnectionInfo info ){
         this( info.userName, info.password, info.connectionIP, info.knownHostsFileName );
     }
 
+    /**
+   * Construct SSh Channel using given parameters
+   * @param  String userName for username
+   * @param  String password for password
+   * @param  String host for connection IP
+   * @param  String knownHostsFileName for filename to set up SSH Channel
+   * @return No return value.
+   */ 
     public SSHManager(String userName, String password, String host, String knownHostsFileName){
         constructorActions(userName, password, host, knownHostsFileName);
         intTimeOut = 30000;
     }
 
+    
+    /**
+   * Function to check the error connecting to SSH Channel
+   * @return Error Message if any error detected
+   */ 
     public String connect(){
         String errorMessage = null;
 
@@ -59,9 +87,19 @@ public class SSHManager{
             sesConnection = jschSSHChannel.getSession(strUserName, strConnectionIP,22);
             sesConnection.setPassword(strPassword);
             UserInfo ui = new MyUserInfo(){
+                /**
+                * Function to pop dialogue box out to show message
+                * @param String message
+                * @return Nothing
+                */ 
                 public void showMessage(String message){
                     JOptionPane.showMessageDialog(null,message);
                 }
+                /**
+                * Function to check the error connecting to SSH Channel
+                * What the hell is this...
+                * @return
+                */ 
                 public boolean promptYesNo(String message){
                     Object[] options={"yes","no"};
                     int foo=JOptionPane.showOptionDialog(null,
