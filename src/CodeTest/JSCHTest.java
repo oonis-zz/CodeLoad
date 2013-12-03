@@ -26,6 +26,7 @@ public class JSCHTest {
       }else{
           System.out.println("Connected!");
       }
+      //
       File currentDirectory = instance.getRoot();
       File test = new File("C:\\Users\\Sam\\Desktop\\Phi2.txt");
       //final JFileChooser fc = new JFileChooser(currentDirectory);
